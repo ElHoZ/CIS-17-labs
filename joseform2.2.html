@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+       <meta charset="utf-8">
+       <title>Form Display Example</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+       <h1>Form Display Example</h1>
+       <p>
+              Enter the following information. When you press the Display
+              button, the data you entered will be displayed in a pop-up.
+       </p>
+       <form name="form1" method="get" action="">
+              <output id="errors"></output>
+              <fieldset>
+                     <legend>Personal Information</legend>
+                     <p>
+                            <label class="question" for="name1">
+                                   What is your fist name?</label>
+                            <input type="text" id="name1" name="name1" placeholder="Enter your first name." size="50"
+                                   required autofocus>
+                     </p>
+                     <p>
+                            <label class="question" for="name2">
+                                   What is your last name?</label>
+                            <input type="text" id="name2" name="name2" placeholder="Enter your last name." size="50"
+                                   required>
+                     </p>
+                     <p>
+                            <label class="question" for="address">
+                                   What is your address?</label>
+                            <input type="text" id="address" name="address" placeholder="Enter your address." size="50"
+                                   required>
+                     </p>
+                     <p>
+                            <label class="question" for="the_email">What is your email
+                                   address?</label>
+                            <input type="email" id="email" name="email" placeholder="Please use a real one!" size="50"
+                                   required>
+                     </p>
+              </fieldset>
+              <fieldset>
+                     <legend>Personal Choices</legend>
+                     <p>
+                            <span class="question">Favorite cuisine:</span><br>
+                            <input type="checkbox" name="fav_food" value="Japanese">
+                            <label for="Japanese">Japanese</label><br>
+                            <input type="checkbox" name="fav_food" value="Thai">
+                            <label for="Thai">Thai</label><br>
+                            <input type="checkbox" name="fav_food" value="Mexican">
+                            <label for="Mexican">Mexican</label><br>
+                            <input type="checkbox" name="fav_food" value="Italian">
+                            <label for="Italian">Italian</label>
+                     </p>
+                     <p>
+                            <span class="question">Please choose your favorite web store:</span><br>
+                            <input type="radio" id="amazon_store" name="fav_store" value="Amazon">
+                            <label for="amazon_store">Amazon</label><br>
+                            <input type="radio" id="ebay_store" name="fav_store" value="eBay">
+                            <label for="ebay_store">eBay</label><br>
+                            <input type="radio" id="etsy_store" name="fav_store" value="Etsy">
+                            <label for="etsy_store">Etsy</label><br>
+                            <input type="radio" id="snkrs_store" name="fav_store" value="SNKRS">
+                            <label for="snkrs_store">SNKRS</label><br>
+                            <input type="radio" id="offerup_store" name="fav_store" value="OfferUp">
+                            <label for="offerup_store">OfferUp</label>
+                     </p>
+                     <p>
+                            <label for="bands">Choose your favorite band:</label>
+                            <select name="bands" id="bands">
+                                   <option value="Diiv">Diiv</option>
+                                   <option value="Real Estate">Real Estate</option>
+                                   <option value="HOMESHAKE">HOMESHAKE</option>
+                                   <option value="The Strokes">The Strokes</option>
+                            </select>
+                     </p>
+              </fieldset>
+              <div id="buttons">
+                     <input type="button" value="Display" id="display">or
+					<input type="reset" value="Erase and Start Over">
+              </div>
+       </form>
+       <script>
+              function getCheckedBoxes() {
+                     var checkboxes = document.getElementsByName("fav_food"); //getting all the check boxes with "fav_food"
+                     var checkboxesChecked = [];//list of checked items into an array.
+                     // loop over them all
+                     for (var i = 0; i < checkboxes.length; i++) {
+                            // And stick the checked ones onto an array...
+                            if (checkboxes[i].checked) {
+                                   checkboxesChecked.push(checkboxes[i].value);
+                            }
+                     }
+                     // Return the array 
+                     return checkboxesChecked;
+              }
+              function display() {
+                     dispWin = window.open('', 'NewWin',
+                            'menubar=no,toolbar=no,status=no,width=600,height=300');
+
+                     message = "<ul><li>What is your fist name?" + " " +
+                            document.form1.name1.value;
+                     message += "<li>What is your last name?" + " " +
+                            document.form1.name2.value;
+                     message += "<li>What is your address?" + " " +
+                            document.form1.address.value;
+                     message += "<li>What is your email address?" + " " +
+                            document.form1.email.value;
+                     message += "<li>Favorite cuisine?" + " " +
+                            getCheckedBoxes();
+                     message += "<li>Please choose your favorite web store:" + " " +
+                            document.form1.fav_store.value;
+                     message += "<li>Choose your favorite band:" + " " +
+                            document.form1.bands.value;
+                     message += "</ul>";
+                     dispWin.document.write(message);
+              }
+              document.getElementById("display").addEventListener("click", display);
+       </script>
+</body>
+
+</html>
